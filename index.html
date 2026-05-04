@@ -2072,7 +2072,7 @@ Por favor respondé con:
 Sé directo, no uses markdown complejo, solo texto con emojis para separar secciones.`;
 
   try {
-    const res = await fetch('/.netlify/functions/claude', {
+    const res = await fetch('/api/claude', {
       method: 'POST',
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify({
@@ -2166,7 +2166,6 @@ AMEX-Santander, VISA-Santander, VISA-Galicia, Mercado Pago, TC - Mercado Pago, B
     });
   });
   ctx += `\n=== CxC pendiente (me deben) — DETALLE ===\n`;
-  // Group by person with item detail
   const cxcDetail = {};
   gastos.filter(g=>g.comp&&g.splits&&(g.cobro_mes||g.mesKey)<='2026-05').forEach(g=>{
     Object.entries(g.splits).forEach(([p,amt])=>{
@@ -2276,7 +2275,7 @@ async function sendChatMsg() {
 
   const systemCtx = buildFinancialContext();
   try {
-    const res = await fetch('/.netlify/functions/claude', {
+    const res = await fetch('/api/claude', {
       method: 'POST',
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify({
